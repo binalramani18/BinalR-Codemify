@@ -1,33 +1,17 @@
 class Helpers {
-   /*  1 - Implement a function “getUsersByAge“  helper.methods.js file.
-The function should return the users from the api.response object aged between 30 - 40 (including 30 and 40!)
-expected result:  [ Alice, Eva, Frank, Henry, Karon ]
--ANS WITH for LOOP
-getUsersByAge(response, ageMin, ageMax) {
-
-        const users = [];
-
-        for (let i = 0; i <response.users.length; i++) {
-            const element = response.users[i];
-            if (element.age >= ageMin && element.age <= ageMax) {
-                users.push(element.name);
-            }
-        }
-
-        return users;
-    }*/
-    //OR ANS WITH forEach LOOP
+   
+    
     getUsersByAge(response, ageMin, ageMax){
          const users = [];
 
-        response.users.forEach(element => {
+         response.users.forEach(element => {
             if (element.age >= ageMin && element.age <= ageMax) {
                 users.push(element.name);
 
               }
             
          });
-      return users;
+         return users;
     }
          //2 - Implement a function “getUsersByRole“ in the helper.methods.js file 
           //The function should return the users from the api.response object who has role admin
