@@ -1,22 +1,18 @@
 class LoginPage {
-  //loginPage.emailInput.type('testuser2@codemify.com')
-  get emailInput() {
-    return cy.get('[name="email"]');
-  }
+  
+  get emailInput() { return cy.get('[name="email"]'); }
 
-  get passwordInput() {
-    return cy.get('[name="password"]');
-  } ////type in password
+  get passwordInput() {return cy.get('[name="password"]'); } 
 
-  get loginBtn() {
-    return cy.contains("Login");
-  } ////click login button
+  get loginBtn() {return cy.contains("Login");} 
+ 
+  get signInText() {return cy.contains("Sign in to Delek Homes");}
 
   login(email, password) {
     this.emailInput.type(email);
     this.passwordInput.type(password);
     this.loginBtn.click();
-   //dashboardPage.roleLabel.should("have.text", "role: user");
+    
   }
 }
 

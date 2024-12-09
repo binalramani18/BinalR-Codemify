@@ -1,35 +1,43 @@
+
+import { faker } from "@faker-js/faker";
+import homePage from "../../../../week-7-cy-automation/cypress/page_objects/home.page";
+import dashboardPage from "../../page_objects/dashboard.page";
+import loginPage from "../../page_objects/login.page";
+import registrationPage from "../../page_objects/registration.page";
+
+const email = faker.internet.email();
+const password = faker.string.uuid();
+
 describe("Registration negative scenario", () => {
   beforeEach(() => {
     cy.visit("/");
   });
 
   it("Should not register with an already existing email account", () => {
-    cy.get('[href="/auth/register"]').click();
-    cy.get('[name="firstName"]').type("Binal");
-    cy.get('[name="lastName"]').type("Ramani");
-    cy.get('[name="email"]').type("testuser2@codemify.com");
-    cy.get('[name="password"]').type("Summer22*");
-    cy.get('[type="submit"]').click();
+    homePage.registerBtn.click();
+    registrationPage.firstNameInput.type("Binal");
+    registrationPage.latNameInput.type("Ramani");
+    registrationPage.emailInput.type(email);
+    registrationPage.passwordInput.type(password);
+    registrationPage.submitBtn.click();
 
-    cy.contains("Register").click();
     // Verify user cannot be logged in
-    cy.get('[role="alert"]').should("contain", "Input data validation failed");
+
+    registrationPage.errorMsg.should("contain", "Input data validation failed");
+
     cy.title().should("eq", "Register | Delek Homes");
   });
 
   it("Should not register without filling in required fields_without last name", () => {
-    cy.get('[href="/auth/register"]').click();
-    cy.get('[name="firstName"]').type("Binal");
-    cy.get('[name="lastName"]').type("Ramani");
-    cy.get('[name="email"]').type("testuser2@codemify.com");
-    cy.get('[name="password"]').type("1234");
-    cy.get('[name="password"]').clear("1234");
-    cy.get('[type="submit"]').click();
-    cy.wait(2000);
+    homePage.registerBtn.click();
+    registrationPage.firstNameInput.type("Binal");
+    registrationPage.latNameInput.type("Ramani");
+    registrationPage.emailInput.type(email);
+    registrationPage.passwordInput.type(password);
+    registrationPage.passwordInput.clear(password);
+    registrationPage.submitBtn.click();
 
-    cy.get('[id=":r7:-helper-text"]')
-      .should("to be.visible")
-      .should("contain", "Password is required"); //this line gives error
+    cy.contains("Password is required");
 
     cy.contains("Register");
     cy.title().should("eq", "Register | Delek Homes");

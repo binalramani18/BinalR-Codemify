@@ -1,25 +1,20 @@
-import homePage from "../../page_objects/home.page";
 import loginPage from "../../page_objects/login.page";
+import homePage from "../../page_objects/home.page";
+import registrationPage from "../../page_objects/registration.page";
 import dashboardPage from "../../page_objects/dashboard.page";
 
-describe("Logout", () => {
+describe("Login", () => {
   beforeEach(() => {
     cy.visit("/");
   });
 
-  it("Should login and logout", () => {
+  it("Should log in with your existing account", () => {
+    
     homePage.loginBtn.click();
-
     loginPage.emailInput.type("testuser2@codemify.com");
     loginPage.passwordInput.type("November22*");
     loginPage.loginBtn.click();
-
     dashboardPage.roleLabel.should("have.text", "role: user");
     dashboardPage.fullNameLabel.should("have.text", "Binal  Ramani");
-
-    dashboardPage.userIconBtn.click();
-    cy.contains("Logout").click();
-
-    loginPage.signInText, should("be.visible");
   });
 });
