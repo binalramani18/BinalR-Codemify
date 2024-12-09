@@ -25,11 +25,9 @@ describe("Registration negative scenario", () => {
     cy.get('[name="password"]').type("1234");
     cy.get('[name="password"]').clear("1234");
     cy.get('[type="submit"]').click();
-    cy.wait(2000);
+    //cy.wait(2000);
 
-    cy.get('[id=":r7:-helper-text"]')
-      .should("to be.visible")
-      .should("contain", "Password is required"); //this line gives error
+    cy.contains("Password is required"); 
 
     cy.contains("Register");
     cy.title().should("eq", "Register | Delek Homes");

@@ -1,10 +1,12 @@
+
 describe("Logout", () => {
   beforeEach(() => {
     cy.visit("/");
   });
 
-  it("Should log out", () => {
-    //cy.get('[href="/auth/login"]').click();
+  it("Should login and logout", () => {
+    
+    cy.get('[href="/auth/login"]').click();
     cy.get('[name="email"]').type("testuser2@codemify.com");
     cy.get('[name="password"]').type("November22*");
     cy.contains("Login").click();
