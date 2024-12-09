@@ -1,4 +1,3 @@
-
 import { faker } from "@faker-js/faker";
 import homePage from "../../../../week-7-cy-automation/cypress/page_objects/home.page";
 import dashboardPage from "../../page_objects/dashboard.page";
@@ -13,7 +12,21 @@ describe("Registration negative scenario", () => {
     cy.visit("/");
   });
 
-  it("Should not register with an already existing email account", () => {
+  it.only("Should not register with an already existing email account", () => {
+    homePage.registerBtn.click();
+    registrationPage.firstNameInput.type("Binal");
+    registrationPage.latNameInput.type("Ramani");
+    registrationPage.emailInput.type(email);
+    registrationPage.passwordInput.type(password);
+    registrationPage.submitBtn.click();
+
+    dashboardPage.roleLabel.should("have.text", "role: user");
+    dashboardPage.fullNameLabel.should("have.text", "Binal  Ramani");
+
+    dashboardPage.userIconBtn.click();
+    cy.contains("Logout").click();
+
+    cy.visit("/");
     homePage.registerBtn.click();
     registrationPage.firstNameInput.type("Binal");
     registrationPage.latNameInput.type("Ramani");
@@ -23,7 +36,10 @@ describe("Registration negative scenario", () => {
 
     // Verify user cannot be logged in
 
-    registrationPage.errorMsg.should("contain", "Input data validation failed");
+    registrationPage.errorMsg.should(
+      "have.text",
+      "Input data validation failed"
+    ); //this line gives error
 
     cy.title().should("eq", "Register | Delek Homes");
   });

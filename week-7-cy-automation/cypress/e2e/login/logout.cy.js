@@ -20,6 +20,6 @@ describe("Logout", () => {
     dashboardPage.userIconBtn.click();
     cy.contains("Logout").click();
 
-    loginPage.signInText, should("be.visible");
+    loginPage.signInText.should("be.visible");
   });
 });
