@@ -12,7 +12,8 @@ describe("Registration negative scenario", () => {
     cy.visit("/");
   });
 
-  it.only("Should not register with an already existing email account", () => {
+ 
+ it.only("Should not register with an already existing email account", () => {
     homePage.registerBtn.click();
     registrationPage.firstNameInput.type("Binal");
     registrationPage.latNameInput.type("Ramani");
