@@ -26,14 +26,14 @@ registrationPage.submitBtn.click();
 dashboardPage.roleLabel.should("have.text", "role: user");
 dashboardPage.fullNameLabel.should("have.text", "Binal  Ramani");
 
-// confirm register user can login
+
 
 dashboardPage.userIconBtn.click();
 cy.contains("Logout").click();
 
 loginPage.login(email,password);
 
-dashboardPage.fullNameLabel.should("have.text", "Binal Ramani");
+dashboardPage.fullNameLabel.should("have.text", "Binal  Ramani");
 dashboardPage.roleLabel.should("have.text", "role: user");
 
 

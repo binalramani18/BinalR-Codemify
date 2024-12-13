@@ -15,7 +15,7 @@ class HomePage {
   }
   get startSearchBtn() {
     return cy.get('[type="button"]');
-  } //get startSearchBtn(){ cy.contains("Start Search")};
+  }
 
   get bedroomDropdown() {
     return cy.get('[role="button"]');
@@ -29,10 +29,7 @@ class HomePage {
 
   verifyBedroomNumberDoesNotHaveText1() {
     this.bedroomIcon.each(($el, index) => {
-      // Use 'index' to check each element
-      cy.wrap($el) // Wrap the element to use Cypress commands
-        .parent()
-        .should("not.have.text", "1"); // Assertion to check that the parent does not have text '1'
+      cy.wrap($el).parent().should("not.have.text", "1");
     });
   }
 
