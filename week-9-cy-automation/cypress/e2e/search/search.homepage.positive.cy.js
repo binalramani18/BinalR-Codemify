@@ -24,8 +24,9 @@ describe("Search Homepage", () => {
     homePage.bedroomDropdown.first().click();
     homePage.bedroomNumber.click();
     homePage.startSearchBtn.click({ force: true });
-
-    homePage.verifyBedroomNumberDoesNotHaveText1();
+    homePage.bedroomIcon.each(($el, index) => {
+      cy.wrap($el).parent().should("not.have.text", "1");
+    });
   });
 
   it("Should by City", () => {
@@ -34,18 +35,21 @@ describe("Search Homepage", () => {
 
     featuredlistingPage.listingAddress.and("contain.text", "9876 main road");
     featuredlistingPage.listingTitle.should("have.text", "Varniraj");
-    featuredlistingPage.zipCodeElement.should("be.visible");
+    featuredlistingPage.zipCodeElement.should("have.text", "365601");
   });
 
-  it("Should search by Price", () => {
-    cy.visit(
-      "https://dev.delekhomes.com/featured-listings?price=500000-8000000"
-    );
+  it.only("Should search by Price", () => {
+    cy.visit("/featured-listings?price=500000-8000000");
 
-    featuredlistingPage.verifyPriceRange();
+    featuredlistingPage.priceElements.each((priceElement) => {
+      const price = priceElement.text().replace(/\D/g, "");
+
+      expect(parseInt(price)).to.be.above(499999);
+      expect(parseInt(price)).to.be.below(5100000);
+    });
   });
 
-  it.only("Should navigate to the listing details page upon click More Info", () => {
+  it("Should navigate to the listing details page upon click More Info", () => {
     homePage.searchInput.first().type("The Taj");
     homePage.startSearchBtn.click();
     featuredlistingPage.moreInfoButton.click();

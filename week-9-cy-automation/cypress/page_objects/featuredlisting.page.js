@@ -14,15 +14,6 @@ class FeaturedListingPage {
     return cy.get(".MuiPaper-rounded div :contains($)");
   }
 
-  verifyPriceRange(minPrice, maxPrice) {
-    this.priceElements.eq(0).each((priceElement) => {
-      const price = priceElement.text().replace(/\D/g, "");
-
-      expect(parseInt(price)).to.be.above(499999);
-      expect(parseInt(price)).to.be.below(5100000);
-    });
-  }
-
   get moreInfoButton() {
     return cy.contains("More Info");
   }

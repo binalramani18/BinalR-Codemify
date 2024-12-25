@@ -27,12 +27,6 @@ class HomePage {
     return cy.get('[viewBox="0 0 2048 1280"]');
   }
 
-  verifyBedroomNumberDoesNotHaveText1() {
-    this.bedroomIcon.each(($el, index) => {
-      cy.wrap($el).parent().should("not.have.text", "1");
-    });
-  }
-
   get cityInputFild() {
     return cy.get('[type="text"]');
   }
