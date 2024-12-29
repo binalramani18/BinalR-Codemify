@@ -20,5 +20,10 @@ class FeaturedListingPage {
   get realtorName() {
     return cy.contains("Realtor: Binal Ramani");
   }
+  get askingPrice(){return cy.contains("Asking Price")};
+  get lotSize(){return cy.contains("Lot Size")};
+  get garageIcon(){return cy.contains("Garage")};
+  get squareFeet(){return cy.contains(" Sqft")};
+  
 }
 export default new FeaturedListingPage();
