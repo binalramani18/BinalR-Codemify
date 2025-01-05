@@ -1,16 +1,26 @@
 import homePage from "../../page_objects/home.page";
 import featuredlistingPage from "../../page_objects/featuredlisting.page";
 import listingDetails from "../../fixtures/testData/listingDetails.json";
-import userCredential from "../../fixtures/testData/userCredential.json";
+import userCredentials from "../../fixtures/testData/userCredentials.json";
+
+let listingId;
 
 describe("Search Homepage", () => {
-  beforeEach(() => {
-    Cypress.on("uncaught:exception", (err, runnable) => {
-      return false;
+  before(() => {
+    cy.loginApi(userCredentials.email, userCredentials.password);
+    cy.createListing(listingDetails).then((id) => {
+      listingId = id;
     });
+  });
 
+  beforeEach(() => {
+    cy.errorHandler();
     cy.visit("/");
-    homePage.nightMode.click({ force: true });
+    homePage.nightMode.click();
+  });
+
+  after(() => {
+    cy.deleteListing(listingId);
   });
 
   it("Should search by keyword", () => {

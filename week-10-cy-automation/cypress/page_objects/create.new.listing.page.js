@@ -1,4 +1,4 @@
-class createNewlistingPage {
+class CreateNewlistingPage {
   get listingTitleInput() {
     return cy.get('[name="title"]');
   }
@@ -48,4 +48,4 @@ class createNewlistingPage {
     return cy.get('[type="submit"]');
   }
 }
-export default new createNewlistingPage();
+export default new CreateNewlistingPage();

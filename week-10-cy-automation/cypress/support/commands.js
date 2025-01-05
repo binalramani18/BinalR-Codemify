@@ -1,5 +1,7 @@
-Cypress.on("uncaught:exception", (err, runnable) => {
-  return false;
+Cypress.Commands.add("errorHandler", () => {
+  Cypress.on("uncaught:exception", (err, runnable) => {
+    return false;
+  });
 });
 
 Cypress.Commands.add("loginApi", (email, password) => {
@@ -12,14 +14,14 @@ Cypress.Commands.add("loginApi", (email, password) => {
 });
 
 Cypress.Commands.add("createListing", (listingDetails) => {
-  cy.fixture("images/house.jpg").then((file) => {
-    const blob = Cypress.Blob.binaryStringToBlob(file);
+  cy.fixture("images/house.jpg").then((image) => {
+    const blob = Cypress.Blob.base64StringToBlob(image, "/house.jpg");
 
     const formData = new FormData();
     formData.append("images", blob);
-    formData.append("title", krishna);
-    formData.append("lotSize", 5000);
-    formData.append("sqft", listingDetails.lotSize);
+    formData.append("title", listingDetails.title);
+    formData.append("lotSize", listingDetails.lotSize);
+    formData.append("sqft", listingDetails.sqft);
     formData.append("garage", listingDetails.garage);
     formData.append("bathrooms", listingDetails.bathrooms);
     formData.append("bedrooms", listingDetails.bedrooms);
@@ -28,7 +30,7 @@ Cypress.Commands.add("createListing", (listingDetails) => {
     formData.append("state", listingDetails.state);
     formData.append("city", listingDetails.city);
     formData.append("address", listingDetails.address);
-    formData.append("description", listingDetails.descreption);
+    formData.append("description", listingDetails.description);
     formData.append("isPublished", "true");
 
     const token = window.localStorage.getItem("accessToken");
@@ -36,15 +38,19 @@ Cypress.Commands.add("createListing", (listingDetails) => {
     return cy
       .request({
         method: "POST",
-        url: "/api/estate/objects",
-        Authorization: `Bearer ${token}`,
+        url: "/api/estate-objects",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+
         body: formData,
       })
       .then((response) => {
         const listingId = JSON.parse(
           String.fromCharCode.apply(null, new Uint8Array(response.body))
         ).id;
-        return listingID;
+
+        return listingId;
       });
   });
 });

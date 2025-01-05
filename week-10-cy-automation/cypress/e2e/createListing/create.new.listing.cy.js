@@ -1,5 +1,5 @@
-import userCredential from "../../fixtures/testData/userCredential.json";
-import createNewListingPage from "../../page_objects/create.new.listing.page";
+import userCredentials from "../../fixtures/testData/userCredentials.json";
+import CreateNewlistingPage from "../../page_objects/create.new.listing.page";
 import listingDetails from "../../fixtures/testData/listingDetails.json";
 import featuredListingPage from "../../page_objects/featuredlisting.page";
 import homePage from "../../page_objects/home.page";
@@ -15,29 +15,29 @@ describe("create new listing", () => {
   });
 
   it("Should create a new listing page", () => {
-    cy.loginApi(userCredential.email, userCredential.password);
+    cy.loginApi(userCredentials.email, userCredentials.password);
     cy.visit("/dashboard/real-estate/new");
 
-    createNewListingPage.listingTitleInput.type(listingDetails.title);
-    createNewListingPage.listingDescriptionInput.type(
+   CreateNewlistingPage.listingTitleInput.type(listingDetails.title);
+    CreateNewlistingPage.listingDescriptionInput.type(
       listingDetails.description
     );
-    createNewListingPage.listingCityInput.type(listingDetails.city);
-    createNewListingPage.listingAddressInput.type(listingDetails.address);
-    createNewListingPage.listingZipCodeInput.type(listingDetails.zipCode);
-    createNewListingPage.listingStateInput.type(listingDetails.state);
-    createNewListingPage.selectState.click();
-    createNewListingPage.listingAddImage.attachFile("images/house.jpg", {
+    CreateNewlistingPage.listingCityInput.type(listingDetails.city);
+    CreateNewlistingPage.listingAddressInput.type(listingDetails.address);
+    CreateNewlistingPage.listingZipCodeInput.type(listingDetails.zipCode);
+   CreateNewlistingPage.listingStateInput.type(listingDetails.state);
+   CreateNewlistingPage.selectState.click();
+   CreateNewlistingPage.listingAddImage.attachFile("images/house.jpg", {
       subjectType: "drag-n-drop",
     });
-    createNewListingPage.listingsetPublishBtn.click();
-    createNewListingPage.listingpriceInput.type(listingDetails.price);
-    createNewListingPage.listingBedroomInput.type(listingDetails.bedrooms);
-    createNewListingPage.listingBathroomInput.type(listingDetails.bathrooms);
-    createNewListingPage.listingGarageInput.type(listingDetails.garage);
-    createNewListingPage.listingSqftInput.type(listingDetails.sqft);
-    createNewListingPage.listingLotSizeInput.type(listingDetails.lotSize);
-    createNewListingPage.listingPostButton.click();
+   CreateNewlistingPage.listingsetPublishBtn.click();
+   CreateNewlistingPage.listingpriceInput.type(listingDetails.price);
+   CreateNewlistingPage.listingBedroomInput.type(listingDetails.bedrooms);
+   CreateNewlistingPage.listingBathroomInput.type(listingDetails.bathrooms);
+   CreateNewlistingPage.listingGarageInput.type(listingDetails.garage);
+   CreateNewlistingPage.listingSqftInput.type(listingDetails.sqft);
+   CreateNewlistingPage.listingLotSizeInput.type(listingDetails.lotSize);
+   CreateNewlistingPage.listingPostButton.click();
 
     cy.visit("/");
     homePage.searchInput.first().click();
