@@ -1,5 +1,5 @@
 import userCredentials from "../../fixtures/testData/userCredentials.json";
-import CreateNewlistingPage from "../../page_objects/create.new.listing.page";
+import CreateNewlistingPage from "../../page_objects/createnewlisting.page";
 import listingDetails from "../../fixtures/testData/listingDetails.json";
 import featuredListingPage from "../../page_objects/featuredlisting.page";
 import homePage from "../../page_objects/home.page";
