@@ -1,0 +1,23 @@
+{
+  "title": "krishna",
+  "city": "amreli",
+  "description": "for sale",
+  "address": "123 amreli",
+  "zipCode": "365601",
+  "state": "Alaska",
+  "price": "700000",
+  "bedrooms": "3",
+  "bathrooms": "3",
+  "garage": "2",
+  "sqft": "2000",
+  "lotSize": "5000",
+  "listingInfo": [
+    "Asking Price: $ 700,000",
+    "Square Feet: 2000",
+    "Lot Size: 5000",
+    "Garage: 2",
+    "Bedrooms: 3",
+    "Bathrooms: 3",
+    "Realtor:Binal Ramani"
+  ]
+}
